@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano Tiles Game </title>
+    <style>
+        body {
+            background: url(/bg.jpg) center center fixed;
+
+            background-size: cover;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 2rem;
+            background-color: rgba(226, 43, 173, 0.6);
+            width: 100%;
+        }
+
+        .container {
+            background-color: rgb(41, 4, 41);
+            border: 2px solid black;
+            border-radius: 23px;
+            width: 50%;
+            height: 94vh;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: space-around;
+}
+
+        .column {
+            
+            height: 8em;
+            width: 100%;
+            display: flex;
+            margin: 0em;
+            justify-content: space-around;
+        }
+
+        .box {
+            background-color:  rgb(193 23 104);
+            color: white;
+            margin: 0.5rem;
+            border: 4px solid white;
+            border-radius: 10px;
+            height: 7em;
+            width: 8em;
+        }
+
+        .btn {
+            border: 2px solid black;
+            border-radius: 1rem;
+            padding: 0.7rem 2rem;
+
+            background-color: red;
+            color: white;
+            display: block;
+            margin: 2rem auto;
+        }
+
+        .btn:hover {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+             <h3> Piano Tiles </h3>
+    </header>
+    <div class="container">
+        <div class="column">
+            <div class="box" id="box1"></div>
+            <div class="box" id="box2"></div>
+            <div class="box" id="box3"></div>
+            <div class="box" id="box4"></div>
+        </div>
+        <div class="column">
+            <div class="box" id="box5"> </div>
+            <div class="box" id="box6"> </div>
+            <div class="box" id="box7"> </div>
+            <div class="box" id="box8"> </div>
+        </div>
+        <div class="column">
+            <div class="box" id="box9"> </div>
+            <div class="box" id="box10"> </div>
+            <div class="box" id="box11"> </div>
+            <div class="box" id="box12"> </div>
+        </div>
+        <div class="column">
+            <div class="box" id="box13"> </div>
+            <div class="box" id="box14"> </div>
+            <div class="box" id="box15"> </div>
+            <div class="box" id="box16"> </div>
+        </div>
+    </div>
+    <button class="btn" onclick="gamestart()">Play</button>
+    <script>
+        interval_id = '';
+
+        function gamestart() {
+            alert("The game is started");
+            interval_id = setInterval(random_colors, 1500);
+        }
+
+        let prev_box_id = "box1";
+        let count = 0;
+
+        function random_colors() {
+            num = Math.round(1 + 15 * Math.random());
+            box_id = "box" + num;
+
+            document.getElementById(box_id).style.backgroundColor = 'rgb(23 193 48)';
+            document.getElementById(prev_box_id).style.backgroundColor = 'rgb(193 23 104)';
+            prev_box_id = box_id;
+
+
+        }
+
+        const boxes = document.querySelectorAll('.box');
+
+        boxes.forEach(box => {
+            box.addEventListener('click', function handleClick(event) {
+                //console.log('box clicked', event);
+                if (box.id == prev_box_id) {
+                    count++;
+                } else {
+                    alert('game over : Your score is :' + count);
+                    count = 0;
+                    clearInterval(interval_id)
+                    document.getElementById(prev_box_id).style.backgroundColor = 'rgb(193 23 104)';
+                }
+            });
+        })
+       
+
+
+
+    </script>
+</body>
+
+</html>
